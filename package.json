@@ -1,5 +1,5 @@
 {
-  "name": "git-clone-cli",
+  "name": "parth-gix-cli",
   "version": "1.0.0",
   "bin": {
     "gix": "./app.js"
