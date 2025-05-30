@@ -5,14 +5,15 @@
 ## 📚 Table of Contents
 - [About](#about)
 - [Installation](#installation)
-- [Usage](#Usage)
+- [Usage](#usage)
 - [Available Commands](#available-commands)
 - [Examples](#examples)
 - [Why I Built This](#why-i-built-this)
-- [Contributing](#Contributing)
-- [License](#License)
+- [Contributing](#contributing)
+- [License](#license)
 
-## 📖 About
+
+## About
 > Ever wondered what happens behind those git add, git commit, and git push commands?
 I did.
 So while learning full-stack development, I built this custom CLI to replicate core Git functionalities and see how version control tools interact with remote servers like GitHub.
@@ -24,20 +25,20 @@ So while learning full-stack development, I built this custom CLI to replicate c
 - Managing remotes
 - Pushing and pulling code
 
-## 🛠️ Installation
+## Installation
 Install it globally using npm:
 ```bash
 npm install -g git-clone-cli
 ```
 Once installed, you can run git-clone-cli commands right from your terminal.
 
-## 🚀 Usage
+## Usage
 The syntax is:
 ```bash
 gix <command> [options]
 ```
 
-## 📦 Available Commands
+## Available Commands
 | Command            | Description                                 |
 | :----------------- | :------------------------------------------ |
 | `init`             | Initialize a new Git repository             |
@@ -47,7 +48,7 @@ gix <command> [options]
 | `push`             | Push changes to the remote repository       |
 | `pull`             | Pull latest changes from the remote         |
 
-## 📖 Examples
+## Examples
 
 Initialize a new repository:
 ```bash
@@ -79,7 +80,7 @@ Pull the latest changes:
 gix pull
 ```
 
-## 🌱 Why I Built This
+## Why I Built This
 
 As part of my journey into full-stack development, I wanted to understand not just how to use tools like Git and GitHub — but how they work internally.
 This project started out of pure curiosity and quickly turned into a hands-on way to learn about:
@@ -93,11 +94,11 @@ This project started out of pure curiosity and quickly turned into a hands-on wa
 And honestly, it made me love coding even more.
 
 
-## 🤝 Contributing
+## Contributing
 Got an idea to improve this tool? Found a bug?
 PRs and issues are welcome! Fork the repo, make your changes, and let’s build cool stuff together.
 
-## 📄 License
+## License
 MIT — see the LICENSE file for details.
 
 ## Parth’s Note:
