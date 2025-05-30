@@ -10,8 +10,6 @@
 - [Examples](#examples)
 - [Why I Built This](#why-i-built-this)
 - [Contributing](#contributing)
-- [License](#license)
-
 
 ## About
 > Ever wondered what happens behind those git add, git commit, and git push commands?
@@ -97,9 +95,6 @@ And honestly, it made me love coding even more.
 ## Contributing
 Got an idea to improve this tool? Found a bug?
 PRs and issues are welcome! Fork the repo, make your changes, and let’s build cool stuff together.
-
-## License
-MIT — see the LICENSE file for details.
 
 ## Parth’s Note:
 > This was a curiosity-driven project for learning purposes, but who knows — maybe it’ll inspire someone else to peek under the hood too.
