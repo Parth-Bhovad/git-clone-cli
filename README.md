@@ -1,4 +1,4 @@
-# git-clone-cli
+# parth-gix-cli
 
 > A custom CLI tool that mimics essential Git commands to interact with GitHub repositories. Built while learning full-stack development and diving deep into how Git + GitHub actually work behind the scenes.
 
@@ -26,9 +26,9 @@ So while learning full-stack development, I built this custom CLI to replicate c
 ## Installation
 Install it globally using npm:
 ```bash
-npm install -g git-clone-cli
+npm install -g npm i parth-gix-cli
 ```
-Once installed, you can run git-clone-cli commands right from your terminal.
+Once installed, you can run parth-gix-cli commands right from your terminal.
 
 ## Usage
 The syntax is:
