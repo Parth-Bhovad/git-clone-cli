@@ -1,24 +1,27 @@
-const axios = require("axios");
-const fs = require("fs").promises;
-const path = require("path");
-const getAllFilePaths = require("../utils/getAllFilePaths");
-const { getRefData } = require("../utils/getRefData");
-
-//importing the findGitRoot function to find the root of the git repository
-const { findGitRoot } = require("../utils/findGitRoot");
+import axios from "axios";
+import fs from "fs/promises";
+import path from "path";
+import chalk from "chalk";
+import getAllFilePaths from "../utils/getAllFilePaths.js";
+import { getRefData } from "../utils/getRefData.js";
+import { findGitRoot } from "../utils/findGitRoot.js";
 
 async function pushRepo() {
+    console.log(chalk.cyan("🚀 Push command called"));
+
     const gitRoot = findGitRoot();
     if (!gitRoot) {
-        console.log("Not a git repository.");
+        console.log(chalk.red.bold("✖ Not a git repository. Please initialize one with `gix init`."));
         process.exit(1);
     }
+
     const repoPath = path.join(gitRoot, ".git");
     const commitDir = path.join(repoPath, "commitDir");
     const commitPaths = path.join(commitDir, "commits");
     const commitJsonPath = path.join(commitDir, "commitsJson");
 
     const { username, reponame } = await getRefData(repoPath);
+    console.log(chalk.yellow(`🔍 Preparing to push ${chalk.bold(reponame)} for user ${chalk.bold(username)}...`));
 
     let filesToUpload = [];
     let filePaths = await getAllFilePaths(commitPaths);
@@ -38,9 +41,13 @@ async function pushRepo() {
         const commit = await fs.readFile(path.join(commitJsonPath, file), "utf-8");
         commitObjects.push(JSON.parse(commit));
     }
-    // Send POST request to backend
+
     try {
-        let urlEndpoint = process.env.NODE_ENV === "production" ? "https://github-server-4yd9.onrender.com" : "http://localhost:3000"
+        let urlEndpoint = process.env.NODE_ENV === "production"
+            ? "https://github-server-4yd9.onrender.com"
+            : "http://localhost:3000";
+
+        console.log(chalk.yellow("📡 Uploading files and commits to server..."));
 
         let res = await axios.post(`${urlEndpoint}/repo/push`, {
             username: username,
@@ -48,13 +55,14 @@ async function pushRepo() {
             files: filesToUpload,
             commits: commitObjects
         });
-        if (res.status == 200) {
+
+        if (res.status === 200) {
             await fs.rm(commitDir, { recursive: true, force: true });
+            console.log(chalk.green.bold("✅ Push completed successfully!"));
         }
-        console.log("Push completed!");
     } catch (error) {
-        console.error("Push failed:", error.message);
+        console.error(chalk.red.bold("✖ Push failed:"), chalk.red(error.message));
     }
 }
 
-module.exports = { pushRepo };
+export { pushRepo };

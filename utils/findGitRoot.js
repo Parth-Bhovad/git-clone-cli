@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
-function findGitRoot(startPath = process.cwd()) {
+export function findGitRoot(startPath = process.cwd()) {
     let currentPath = startPath;
 
     while (currentPath !== path.parse(currentPath).root) {
@@ -12,5 +12,3 @@ function findGitRoot(startPath = process.cwd()) {
     }
     return null;
 }
-
-module.exports = { findGitRoot };

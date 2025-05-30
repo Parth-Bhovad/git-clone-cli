@@ -1,16 +1,16 @@
-const fs = require("fs").promises;
-const path = require("path");
+import { promises as fs } from "fs";
+import path from "path";
+import chalk from "chalk";
 
-async function initRepo() {
-    console.log("Init Command called");
+export async function initRepo() {
+    console.log(chalk.cyan("🚀 Init command called."));
+
     const repoPath = path.resolve(process.cwd(), ".git");
 
     try {
         await fs.mkdir(repoPath, { recursive: true });
-        console.log("Repository intialised");
-    } catch (error) {
-        console.error("Error initailizing repository", err);
+        console.log(chalk.green.bold("✔ Repository initialized successfully at ./.git"));
+    } catch (err) {
+        console.error(chalk.red.bold("✖ Error initializing repository:"), chalk.red(err.message));
     }
 }
-
-module.exports = { initRepo };

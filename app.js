@@ -1,14 +1,13 @@
 #! /usr/bin/env node
-const { program } = require('commander');
+import { program } from 'commander';
 
-//importing commands functions
-const {initRepo} = require("./commands/init");
-const {addRepo} = require("./commands/add");
-const {commitRepo} = require("./commands/commit");
-const {pushRepo} = require("./commands/push");
-const {pullRepo} = require("./commands/pull");
-const {addRemoteRepo} = require("./commands/addRemoteRepo");
-
+// importing commands functions
+import { initRepo } from './commands/init.js';
+import { addRepo } from './commands/add.js';
+import { commitRepo } from './commands/commit.js';
+import { pushRepo } from './commands/push.js';
+import { pullRepo } from './commands/pull.js';
+import { addRemoteRepo } from './commands/addRemoteRepo.js';
 
 program
     .command('init')
@@ -35,7 +34,7 @@ program
     .description('Pull changes from a remote repository')
     .action(pullRepo);
 
-    program
+program
     .command('remote <link>')
     .description('Add a remote repository')
     .action(addRemoteRepo);

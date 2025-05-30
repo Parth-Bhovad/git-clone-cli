@@ -1,28 +1,33 @@
-const fs = require("fs").promises;
-const path = require("path");
-const axios = require("axios");
-const { getRefData } = require("../utils/getRefData");
-
-//importing the findGitRoot function to find the root of the git repository
-const { findGitRoot } = require("../utils/findGitRoot");
+import fs from "fs/promises";
+import path from "path";
+import axios from "axios";
+import chalk from "chalk";
+import { getRefData } from "../utils/getRefData.js";
+import { findGitRoot } from "../utils/findGitRoot.js";
 
 async function pullRepo() {
-    console.log("pull function called");
+    console.log(chalk.cyan("📥 Pull command called"));
+
     const gitRoot = findGitRoot();
     if (!gitRoot) {
-        console.log("Not a git repository.");
+        console.log(chalk.red.bold("✖ Not a git repository. Please initialize one with `gix init`."));
         process.exit(1);
     }
+
     const repoPath = path.join(gitRoot, ".git");
 
     const { username, reponame } = await getRefData(repoPath);
 
     try {
+        let urlEndpoint = process.env.NODE_ENV === "production"
+            ? "https://github-server-4yd9.onrender.com"
+            : "http://localhost:3000";
 
-        let urlEndpoint = process.env.NODE_ENV === "production" ? "https://github-server-4yd9.onrender.com" : "http://localhost:3000";
+        console.log(chalk.yellow(`🔗 Fetching repository data from ${urlEndpoint}/repo/pull/${reponame}`));
 
         const response = await axios.get(`${urlEndpoint}/repo/pull/${reponame}`);
-        console.log("Pull response:", response.data);
+        console.log(chalk.green("✔ Repository data fetched successfully!"));
+
         const { files } = response.data;
 
         const basePath = path.join(username, reponame);
@@ -30,14 +35,14 @@ async function pullRepo() {
         for (const file of files) {
             const relativePath = path.relative(basePath, file.path);
             await fs.mkdir(path.dirname(relativePath), { recursive: true });
-            await fs.writeFile(relativePath, file.content, 'utf-8');
+            await fs.writeFile(relativePath, file.content, "utf-8");
         }
+
+        console.log(chalk.green.bold("✅ Repository files pulled successfully into your project."));
     } catch (error) {
-        console.error("Error pulling repository:", error);
+        console.error(chalk.red.bold("✖ Error pulling repository:"), chalk.red(error.message));
         process.exit(1);
     }
 }
 
-module.exports = {
-    pullRepo
-};
+export { pullRepo };

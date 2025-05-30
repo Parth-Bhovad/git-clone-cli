@@ -1,5 +1,6 @@
-const fs = require("fs").promises
-const path = require("path");
+import { promises as fs } from "fs";
+import path from "path";
+
 const getAllFilePaths = async (filePath) => {
     let filePaths = [];
     let items = await fs.readdir(filePath);
@@ -16,5 +17,6 @@ const getAllFilePaths = async (filePath) => {
         }
     }
     return filePaths;
-}
-module.exports = getAllFilePaths;
+};
+
+export default getAllFilePaths;
