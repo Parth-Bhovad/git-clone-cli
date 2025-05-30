@@ -44,7 +44,7 @@ gix <command> [options]
 | `commit <message>` | Commit staged changes with a commit message |
 | `remote <link>`    | Add a remote repository URL                 |
 | `push`             | Push changes to the remote repository       |
-| `pull`             | Pull latest changes from the remote         |
+| `pull`             |Download all files and folders from the remote repository        |
 
 ## Examples
 
@@ -73,7 +73,7 @@ Push your changes:
 gix push
 ```
 
-Pull the latest changes:
+Download all files and folders from the remote repository:
 ```bash
 gix pull
 ```
