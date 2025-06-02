@@ -4,6 +4,7 @@ import axios from "axios";
 import chalk from "chalk";
 import { getRefData } from "../utils/getRefData.js";
 import { findGitRoot } from "../utils/findGitRoot.js";
+import getEnvSetting from "../utils/getEnvSettings.js";
 
 async function pullRepo() {
     console.log(chalk.cyan("📥 Pull command called"));
@@ -14,12 +15,14 @@ async function pullRepo() {
         process.exit(1);
     }
 
+    const envSetting = getEnvSetting(gitRoot);
+
     const repoPath = path.join(gitRoot, ".git");
 
     const { username, reponame } = await getRefData(repoPath);
 
     try {
-        let urlEndpoint = process.env.NODE_ENV === "production"
+        let urlEndpoint = envSetting === "production"
             ? "https://github-server-4yd9.onrender.com"
             : "http://localhost:3000";
 
