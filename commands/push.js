@@ -46,9 +46,9 @@ async function pushRepo() {
     }
 
     try {
-        let urlEndpoint = envSetting === "production"
-            ? "https://github-server-4yd9.onrender.com"
-            : "http://localhost:3000";
+        let urlEndpoint = envSetting === "development"
+            ? "http://localhost:3000"
+            : "https://github-server-4yd9.onrender.com";
 
         console.log(chalk.yellow("📡 Uploading files and commits to server..."));
 
