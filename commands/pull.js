@@ -25,6 +25,7 @@ async function pullRepo() {
         let urlEndpoint = envSetting === "development"
             ? "http://localhost:3000"
             : "https://github-server-4yd9.onrender.com";
+            console.log(urlEndpoint);
 
         console.log(chalk.yellow(`🔗 Fetching repository data from ${urlEndpoint}/repo/pull/${reponame}`));
 
